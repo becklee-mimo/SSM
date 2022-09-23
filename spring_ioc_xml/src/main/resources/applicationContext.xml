@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:lang="http://www.springframework.org/schema/lang" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+    <bean id="studentOne" class="com.atguigu.spring.pojo.Student" >
+        <property name="sid" value="1001"></property>
+        <property name="age" value="23"></property>
+        <property name="gender" ><null/></property>
+        <property name="sname" value="张三"></property>
+        <!--数组-->
+        <property name="hobby">
+            <array>
+                <value>唱</value>
+                <value>跳</value>
+                <value>rap</value>
+                <value>篮球</value>
+            </array>
+        </property>
+        <!--类-->
+        <property name="clazz">
+            <bean id="classOne" class="com.atguigu.spring.pojo.Clazz">
+                <property name="cname" value="一班"></property>
+                <property name="cid" value="1001"></property>
+            </bean>
+        </property>
+        <!--Map集合-->
+<!--        <property name="teacherMap" >-->
+<!--            <map>-->
+<!--                <entry key="语文" value-ref="teacherOne"></entry>-->
+<!--                <entry key="数学" value-ref="teacherTwo"></entry>-->
+<!--            </map>-->
+<!--        </property>-->
+        <property name="teacherMap" ref="teacherMap"></property>
+    </bean>
+
+    <!--以下作为外部bean-->
+    <bean id="teacherOne" class="com.atguigu.spring.pojo.Teacher">
+        <property name="teacherId" value="100"></property>
+        <property name="teacherName" value="李老师"></property>
+    </bean>
+
+    <bean id="teacherTwo" class="com.atguigu.spring.pojo.Teacher">
+        <property name="teacherId" value="101"></property>
+        <property name="teacherName" value="吴老师"></property>
+    </bean>
+
+    <bean id="studentTwo" class="com.atguigu.spring.pojo.Student">
+    </bean>
+
+    <bean id="clazz" class="com.atguigu.spring.pojo.Clazz">
+        <property name="cname" value="真的一般"></property>
+        <property name="cid" value="1001"></property>
+    </bean>
+
+
+    <util:map id="teacherMap">
+        <entry key="Chinese" value-ref="teacherOne"></entry>
+        <entry key="Math" value-ref="teacherTwo"></entry>
+    </util:map>
+
+    <bean id="studentNew" class="com.atguigu.spring.pojo.Student"
+    p:sid="10086" p:age="15" p:gender="男" p:teacherMap-ref="teacherMap"></bean>
+
+
+</beans>
